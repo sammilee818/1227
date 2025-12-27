@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心理健康聊天机器人</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <div class="header-left">
+                <h1>心理健康聊天机器人</h1>
+                <p class="subtitle">基于CBT+ACT模型的专业支持</p>
+            </div>
+            <div class="header-actions">
+                <button id="settingsBtn" class="btn btn-icon" title="设置">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <div class="chat-main">
+            <div class="chat-content">
+                <div id="chatMessages" class="chat-messages">
+                    <div class="welcome-message">
+                        <div class="welcome-icon">💬</div>
+                        <h2>欢迎使用心理健康聊天机器人</h2>
+                        <p>我是您的心理健康助手，基于认知行为疗法(CBT)和接受与承诺疗法(ACT)为您提供专业支持。</p>
+                        <p class="hint">点击右上角设置按钮配置API后即可开始对话</p>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <form id="chatForm">
+                        <div class="input-wrapper">
+                            <textarea id="messageInput" placeholder="输入您的消息..." rows="1" autocomplete="off"></textarea>
+                            <button type="submit" class="btn btn-primary btn-send" id="sendBtn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设置模态框 -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>API 配置</h2>
+                <button class="modal-close" id="closeSettingsBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="settingsForm">
+                    <div class="form-group">
+                        <label for="apiUrl">API 地址</label>
+                        <input type="text" id="apiUrl" name="apiUrl" placeholder="https://api.example.com/v1/chat/completions" required>
+                        <small>例如: https://api.openai.com/v1/chat/completions</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="apiKey">API 密钥</label>
+                        <input type="password" id="apiKey" name="apiKey" placeholder="sk-..." required>
+                        <small>您的API密钥将被安全存储</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="modelName">模型名称</label>
+                        <input type="text" id="modelName" name="modelName" placeholder="gpt-3.5-turbo" required>
+                        <small>例如: gpt-3.5-turbo, gpt-4, claude-3-opus 等</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">保存配置</button>
+                        <button type="button" class="btn btn-secondary" id="cancelSettingsBtn">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>
